@@ -112,13 +112,15 @@ public class GUI
     }
     public static void same_station_error()
     {
-        mainFrame.repaint();
+       /* mainFrame.repaint();
         ErrorTV.setText("Sie müssen zwei verschiedene Stationen auswählen!");
         ErrorTV.setVisible(true);
         ErrorTV.setEditable(false);
         ErrorTV.setEnabled(true);
         mainPanel.add(ErrorTV);
         mainFrame.add(mainPanel);
+        
+        */
         paint();
     }
 }

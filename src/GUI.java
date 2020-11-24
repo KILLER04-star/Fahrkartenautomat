@@ -13,7 +13,6 @@ public class GUI
     public static ArrayList<JTextField> possible_station = new ArrayList<>();
     public static  JTextField ErrorTV = new JTextField();
     
-    public static int possible_station_x = 350;
     public static int possible_station_y = 50;
 
     public static int size = 0;
@@ -40,7 +39,7 @@ public class GUI
         if(list.size() ==0 )
         {
             ErrorTV.setText("Fehler: Suche für "+Query+" ergab 0 Ergebnisse");
-            ErrorTV.setBounds(possible_station_x,possible_station_y,300,30);
+            ErrorTV.setBounds(TV.getX(),possible_station_y+10+startTextField.getHeight(),300,30);
             ErrorTV.setVisible(true);
             ErrorTV.setEnabled(true);
             ErrorTV.setEditable(false);
@@ -59,7 +58,7 @@ public class GUI
         for(int i = 0;i<size;i++)
         {
            JTextField textField = new JTextField(list.get(i).getName());
-           textField.setBounds(possible_station_x,possible_station_y,300,30);
+            textField.setBounds(TV.getX(),possible_station_y+TV.getHeight()+10,300,30);
            textField.setVisible(true);
            textField.setEnabled(true);
            textField.setEditable(false);
@@ -102,7 +101,7 @@ public class GUI
         startTextField.setVisible(true);
         mainPanel.add(startTextField);
 
-        DestinationTV.setBounds(800,50,300,30);
+        DestinationTV.setBounds(startTextField.getX()+startTextField.getWidth()+50,50,300,30);
         DestinationTV.setEnabled(true);
         DestinationTV.setEditable(true);
         DestinationTV.setVisible(true);
@@ -112,15 +111,6 @@ public class GUI
     }
     public static void same_station_error()
     {
-       /* mainFrame.repaint();
-        ErrorTV.setText("Sie müssen zwei verschiedene Stationen auswählen!");
-        ErrorTV.setVisible(true);
-        ErrorTV.setEditable(false);
-        ErrorTV.setEnabled(true);
-        mainPanel.add(ErrorTV);
-        mainFrame.add(mainPanel);
-        
-        */
         paint();
     }
 }

@@ -10,7 +10,7 @@ public class ExcelReader
     {
         this.path = path;
     }
-    List<Station> read()
+    public List<Station> read()
     {
         List<Station> result = new ArrayList<>();
         try

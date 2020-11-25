@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -11,6 +12,14 @@ public class ActionListener
             String Query = GUI.startTextField.getText();
             GUI.list_stations(Search.search(Query),Query,GUI.startTextField,GUI.DestinationTV);
             GUI.startTextField.requestFocus();
+            GUI.mainFrame.repaint();
+            if(GUI.DestinationTV.getText().equals(GUI.startTextField.getText()))
+            {
+                GUI.same_station_error();
+            }else
+            {
+                GUI.apply.setBackground(Color.GREEN);
+            }
         });
         GUI.startTextField.addKeyListener(new KeyAdapter()
         {
@@ -20,6 +29,14 @@ public class ActionListener
                 String Query = GUI.startTextField.getText();
                 GUI.list_stations(Search.search(Query), Query, GUI.startTextField, GUI.DestinationTV);
                 GUI.startTextField.requestFocus();
+                GUI.mainFrame.repaint();
+                if(GUI.DestinationTV.getText().equals(GUI.startTextField.getText()))
+                {
+                    GUI.same_station_error();
+                }else
+                {
+                    GUI.apply.setBackground(Color.GREEN);
+                }
             }
         });
 
@@ -34,6 +51,14 @@ public class ActionListener
                     GUI.same_station_error();
                 }else GUI.list_stations(Search.search(Query),Query,GUI.DestinationTV,GUI.startTextField);
                 GUI.DestinationTV.requestFocus();
+                GUI.mainFrame.repaint();
+                if(GUI.DestinationTV.getText().equals(GUI.startTextField.getText()))
+                {
+                    GUI.same_station_error();
+                }else
+                {
+                    GUI.apply.setBackground(Color.GREEN);
+                }
             }
         });
         GUI.DestinationTV.addKeyListener(new KeyAdapter()
@@ -41,14 +66,35 @@ public class ActionListener
             @Override
             public void keyTyped(KeyEvent e)
             {
-                String Query = GUI.DestinationTV.getText();
-                if(Query.equals(GUI.startTextField.getText()))
+                    String Query = GUI.DestinationTV.getText();
+                    if(Query.equals(GUI.startTextField.getText()))
+                    {
+                        GUI.same_station_error();
+                    }else GUI.list_stations(Search.search(Query),Query,GUI.DestinationTV,GUI.startTextField);
+                    GUI.DestinationTV.requestFocus();
+                    GUI.mainFrame.repaint();
+                if(GUI.DestinationTV.getText().equals(GUI.startTextField.getText()))
                 {
                     GUI.same_station_error();
-                }else GUI.list_stations(Search.search(Query),Query,GUI.DestinationTV,GUI.startTextField);
-                GUI.DestinationTV.requestFocus();
+                }else
+                {
+                    GUI.apply.setBackground(Color.GREEN);
+                }
             }
         });
-
+        GUI.apply.addActionListener(new java.awt.event.ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                if(GUI.DestinationTV.getText().equals(GUI.startTextField.getText()))
+                {
+                    GUI.same_station_error();
+                }else
+                {
+                    GUI.apply.setBackground(Color.GREEN);
+                }
+            }
+        });
     }
 }

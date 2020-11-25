@@ -11,9 +11,10 @@ public class GUI
     public static JTextField DestinationTV = new JTextField();
     public static JTextField startTextField = new JTextField();
     public static ArrayList<JTextField> possible_station = new ArrayList<>();
-    public static  JTextField ErrorTV = new JTextField();
+    public static JTextField ErrorTV = new JTextField();
     public static JLabel startLabel = new JLabel("von");
     public static JLabel toJLabel = new JLabel("nach");
+    public static JButton apply = new JButton("Ok");
 
     public static int possible_station_x = 350;
     public static int possible_station_y = 50;
@@ -81,6 +82,7 @@ public class GUI
                         same_station_error();
                     }else
                     {
+                        apply.setVisible(true);
                         TV.setText(textField.getText());
                         possible_station.removeAll(collection);
                         mainPanel.removeAll();
@@ -123,17 +125,17 @@ public class GUI
         DestinationTV.setVisible(true);
         mainPanel.add(DestinationTV);
 
+        apply.setVisible(true);
+        apply.setEnabled(true);
+        apply.setBounds(250,200,200,30);
+        mainPanel.add(apply);
+
         mainFrame.add(mainPanel);
     }
     public static void same_station_error()
     {
+        apply.setBackground(Color.RED);
         mainFrame.repaint();
-        ErrorTV.setText("Sie müssen zwei verschiedene Stationen auswählen!");
-        ErrorTV.setVisible(true);
-        ErrorTV.setEditable(false);
-        ErrorTV.setEnabled(true);
-        mainPanel.add(ErrorTV);
-        mainFrame.add(mainPanel);
         paint();
     }
 }

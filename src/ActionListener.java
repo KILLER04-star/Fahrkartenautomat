@@ -49,6 +49,5 @@ public class ActionListener
                 GUI.DestinationTV.requestFocus();
             }
         });
-
     }
 }

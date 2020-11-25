@@ -19,4 +19,15 @@ public class Search
         }
         return result;
     }
+    public static boolean isStation(String Query)
+    {
+        ExcelReader excelReader = new ExcelReader("src/DB.csv");
+        List<Station> stations = excelReader.read();
+        for(int i = 0;i<stations.size();i++)
+        {
+
+            if(stations.get(i).getName().equals(Query)) return true;
+        }
+        return false;
+    }
 }

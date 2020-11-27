@@ -1,6 +1,8 @@
 public class Pricing
 {
     public static double calculatePrice(Station start, Station destination)
+        /*Berechnet den Preis aus den Postleitzahlen
+    der Stationen (Obergrenze ist 100€, Untergrenze 5€)*/
     {
         double result;
         if(!start.getPostal_Code().equals(destination.getPostal_Code()))

@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class PrintTicket
-{
+{ //Generiert das Ticket als .png-Datai
     public static void print_ticket(Station start,Station end, Double price)
     {
         SimpleDateFormat sdf_date = new SimpleDateFormat("dd.MM.yyyy");

@@ -3,12 +3,12 @@ import java.util.List;
 
 public class Search 
 {
-    public static ArrayList<Station> search(String Query)
+    public static ArrayList<Station> search(String Query) //gibt eine Liste mit möglichen Stationen zurück
     {
         ArrayList<Station> result = new ArrayList<>();
-        List<Station> search;
         ExcelReader excelReader = new ExcelReader("src/DB.csv");
-        search = excelReader.read();
+        List<Station> search = excelReader.read();
+
         for (Station station : search)
         {
             if (station.getName().contains(Query) && !station.getName().equals("Station")) result.add(station);
@@ -16,7 +16,7 @@ public class Search
         return result;
     }
 
-    public static boolean isStation(String Query)
+    public static boolean isStation(String Query) //Testet, ob ein Name zu einer Station gehört
     {
         ExcelReader excelReader = new ExcelReader("src/DB.csv");
         List<Station> stations = excelReader.read();

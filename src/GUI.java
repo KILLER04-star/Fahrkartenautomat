@@ -163,7 +163,7 @@ public class GUI
 
         int ops = 0;
 
-        for(int i = 0;i<4;i++)
+        for(int i = 0;i<4;i++) //zeichnet Geldscheine und lässt den Nutzer Bezahlen
         {
             money_x = 1000;
             int height = 0;
@@ -213,6 +213,7 @@ public class GUI
             mainFrame.repaint();
         }
         mainFrame.repaint();
+        /*Tut nichts weiter, als sämtliche Objekte in das Frame zu zeichnen*/
         ImageIcon BC25_Icon = new ImageIcon("src/BC25.jpg");
         ImageIcon BC50_Icon = new ImageIcon("src/BC50.jpg");
 
@@ -327,7 +328,7 @@ public class GUI
         paint();
     }
     public static void showTicket()
-    {
+    { //Zeigt das generierte Ticket in einem seperatem Fenster
         JFrame ticketFrame = new JFrame("Ticket");
         final JPanel ticket_panel = new JPanel()
         {
@@ -379,7 +380,7 @@ public class GUI
         });
     }
     public static void Show_Qr()
-    {
+    { //zeigt den generierten QR-Code in einem seperatem Fenster
         JFrame qrFrame = new JFrame("QR");
         final JPanel qr_panel = new JPanel()
         {

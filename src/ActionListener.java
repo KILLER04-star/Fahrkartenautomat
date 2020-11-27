@@ -3,12 +3,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-
+/*fast sämtliche Actions (außer diejenigen aus den Listen) werden hier erkannt und dann verarbeitet*/
 public class ActionListener
 {
     public static void Actions()
     {
-        GUI.startTextField.addActionListener(new java.awt.event.ActionListener()
+        GUI.startTextField.addActionListener(new java.awt.event.ActionListener() //Nutzer drückt Enter im Feld für die erste Station
         {
             @Override
             public void actionPerformed(ActionEvent e)
@@ -16,7 +16,7 @@ public class ActionListener
                 startTVActions();
             }
         });
-        GUI.startTextField.addKeyListener(new KeyAdapter()
+        GUI.startTextField.addKeyListener(new KeyAdapter() //Nutzer schreibt Text in das Feld für die erste Station
         {
             @Override
             public void keyTyped(KeyEvent e)
@@ -25,7 +25,7 @@ public class ActionListener
             }
         });
 
-        GUI.DestinationTV.addActionListener(new java.awt.event.ActionListener()
+        GUI.DestinationTV.addActionListener(new java.awt.event.ActionListener() //Nutzer drückt Enter im Feld für die zweite Station
         {
             @Override
             public void actionPerformed(ActionEvent e)
@@ -33,7 +33,7 @@ public class ActionListener
                 DestinationTVActions();
             }
         });
-        GUI.DestinationTV.addKeyListener(new KeyAdapter()
+        GUI.DestinationTV.addKeyListener(new KeyAdapter() //Nutzer schreibt Text in das Feld für die Zweite Station
         {
             @Override
             public void keyTyped(KeyEvent e)
@@ -44,7 +44,7 @@ public class ActionListener
         GUI.apply.addActionListener(new java.awt.event.ActionListener()
         {
             @Override
-            public void actionPerformed(ActionEvent e)
+            public void actionPerformed(ActionEvent e) //Nutzer drückt Ok-Button
             {
                 if (GUI.DestinationTV.getText().equals(GUI.startTextField.getText()) || !Search.isStation(GUI.DestinationTV.getText())
                         || !Search.isStation(GUI.startTextField.getText()))
@@ -69,7 +69,7 @@ public class ActionListener
         GUI.card.addActionListener(new java.awt.event.ActionListener()
         {
             @Override
-            public void actionPerformed(ActionEvent e)
+            public void actionPerformed(ActionEvent e) //Nutzer besitzt eine Bahncard
             {
                 GUI.no_card.setVisible(false);
                 GUI.user_HasCard.setText("Bitte wählen: ");
@@ -79,7 +79,7 @@ public class ActionListener
                 GUI.mainFrame.repaint();
             }
         });
-        GUI.no_card.addActionListener(new java.awt.event.ActionListener()
+        GUI.no_card.addActionListener(new java.awt.event.ActionListener() //Nutzer besitzt keine Bahncard
         {
             @Override
             public void actionPerformed(ActionEvent e)
@@ -101,7 +101,7 @@ public class ActionListener
                 Var.hasToPay = true;
             }
         });
-        GUI.print_ticket.addActionListener(new java.awt.event.ActionListener()
+        GUI.print_ticket.addActionListener(new java.awt.event.ActionListener() //Nutzer möchte das Ticket edruckt bekommen
         {
             @Override
             public void actionPerformed(ActionEvent e)
@@ -124,7 +124,7 @@ public class ActionListener
                 }
             }
         });
-        GUI.show_Qr.addActionListener(new java.awt.event.ActionListener()
+        GUI.show_Qr.addActionListener(new java.awt.event.ActionListener() //Nutzer möchte einen QR-Code sehen
         {
             @Override
             public void actionPerformed(ActionEvent e)
@@ -146,7 +146,7 @@ public class ActionListener
                 }
             }
         });
-        GUI.BC25_Btn.addActionListener(new java.awt.event.ActionListener()
+        GUI.BC25_Btn.addActionListener(new java.awt.event.ActionListener() //Nutzer hat eine Bahncard 25
         {
             @Override
             public void actionPerformed(ActionEvent e)
@@ -163,7 +163,7 @@ public class ActionListener
                 Var.hasToPay = true;
             }
         });
-        GUI.BC50_Btn.addActionListener(new java.awt.event.ActionListener()
+        GUI.BC50_Btn.addActionListener(new java.awt.event.ActionListener() //Nutzer hat eine Bahncard 50
         {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -179,7 +179,6 @@ public class ActionListener
                 Var.hasToPay = true;
             }
         });
-        money_actions();
     }
 
     private static void Label_setText()
@@ -193,7 +192,7 @@ public class ActionListener
     }
 
     public static void DestinationTVActions()
-    {
+    { //Aktion für das Generieren der Liste an möglichen Zielen (Start und Ziel können nicht identisch sein)
         String Query = GUI.DestinationTV.getText();
         if (Query.equals(GUI.startTextField.getText()))
         {
@@ -209,7 +208,7 @@ public class ActionListener
     }
 
     public static void startTVActions()
-    {
+    {//Aktion für das Generieren der Liste an möglichen Startpunkten (Start und Ziel können nicht identisch sein)
         String Query = GUI.startTextField.getText();
         GUI.list_stations(Search.search(Query), Query, GUI.startTextField, GUI.DestinationTV);
         GUI.startTextField.requestFocus();
@@ -219,24 +218,5 @@ public class ActionListener
         {
             GUI.same_station_error();
         } else GUI.apply.setBackground(Color.GREEN);
-    }
-
-    public static void money_actions()
-    {
-        for (int i = 0; i < GUI.moneyButtons.size(); i++)
-        {
-            MoneyButton moneyButton = GUI.moneyButtons.get(i);
-            moneyButton.getButton().addActionListener(new java.awt.event.ActionListener()
-            {
-                @Override
-                public void actionPerformed(ActionEvent e)
-                {
-                    Var.still_to_pay -= moneyButton.getValue();
-                    System.out.println(Var.still_to_pay);
-                    GUI.still_to_pay_label.setText("Noch zu zahlen: " + Var.still_to_pay + " " + GUI.euro);
-                    GUI.mainFrame.repaint();
-                }
-            });
-        }
     }
 }

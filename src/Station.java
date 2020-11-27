@@ -1,5 +1,5 @@
 public class Station
-{
+{ //Objekt enthält alle wichtigen Informationen über die Station (Name,Adresse)
     final String name;
     final String street;
     final String county;

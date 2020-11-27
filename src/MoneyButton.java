@@ -1,6 +1,6 @@
 import javax.swing.*;
 
-public class MoneyButton
+public class MoneyButton //spezieller Button für das Bezahlenfeld, welcher den Wert des Geldes und den Button enthält
 {
     JButton button;
     double value;

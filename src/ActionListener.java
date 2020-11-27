@@ -6,7 +6,8 @@ import java.util.ArrayList;
 
 public class ActionListener
 {
-    public static void Actions() {
+    public static void Actions()
+    {
         GUI.startTextField.addActionListener(new java.awt.event.ActionListener()
         {
             @Override

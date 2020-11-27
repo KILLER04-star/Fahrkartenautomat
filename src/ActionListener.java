@@ -8,7 +8,8 @@ public class ActionListener
 {
     public static void Actions()
     {
-        GUI.startTextField.addActionListener(new java.awt.event.ActionListener() {
+        GUI.startTextField.addActionListener(new java.awt.event.ActionListener()
+        {
             @Override
             public void actionPerformed(ActionEvent e)
             {
@@ -83,6 +84,7 @@ public class ActionListener
             @Override
             public void actionPerformed(ActionEvent e)
             {
+                Var.Card="";
                 ArrayList<Station> possible = Search.search(GUI.DestinationTV.getText());
                 Station end = possible.get(0);
                 possible = Search.search(GUI.startTextField.getText());
@@ -187,10 +189,7 @@ public class ActionListener
             ||!Search.isStation(GUI.startTextField.getText()))
     {
         GUI.same_station_error();
-    }else
-    {
-        GUI.apply.setBackground(Color.GREEN);
-    }
+    }else GUI.apply.setBackground(Color.GREEN);
 }
 public static void startTVActions()
 {
@@ -201,8 +200,6 @@ public static void startTVActions()
     if (GUI.DestinationTV.getText().equals(GUI.startTextField.getText()) || !Search.isStation(GUI.DestinationTV.getText())
             || !Search.isStation(GUI.startTextField.getText())) {
         GUI.same_station_error();
-    } else {
-        GUI.apply.setBackground(Color.GREEN);
-    }
+    } else GUI.apply.setBackground(Color.GREEN);
 }
 }

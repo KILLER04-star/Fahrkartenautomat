@@ -148,36 +148,30 @@ public class GUI
     {
         money_x = 1000;
         money_y = 200;
-       /*
-        */
+
+
         mainPanel.setVisible(true);
         mainPanel.setLayout(null);
         mainPanel.setEnabled(true);
-
-        for(int i = 0;i<Money.queries.length;i++)
+        int ops = 0;
+        for(int i = 0;i<4;i++)
         {
-            JButton button = new JButton(Money.allowed_values[i]+" "+GUI.euro);
-            try
+            ops++;
+            money_x = 1000;
+            for(int y = 0;y<3;y++)
             {
-                Money money = new Money(Money.allowed_values[i]);
-              //  System.out.println(money.getImage());
-              //  button.setIcon(money.getImage());
-            }catch (Exception e)
-            {
-                e.printStackTrace();
+                 ops *= y;
+                JButton button = new JButton();
+                Money money = new Money(Money.allowed_values[ops]);
+                button.setVisible(true);
+                button.setEnabled(true);
+               // button.setIcon(money.getImage());
+                button.setBounds(money_x,money_y,100,100);
+                mainPanel.add(button);
+                money_x +=110;
             }
-            button.setVisible(true);
-            button.setEnabled(true);
-            button.setBounds(money_x,money_y,100,100);
-            mainPanel.add(button);
-            money_x += 120;
-            if(Money.allowed_values[i]==1)
-            {
-                money_y+=120;
-                money_x=1000;
-            }
+            money_y +=110;
         }
-
         ImageIcon BC25_Icon = new ImageIcon("src/BC25.jpg");
         ImageIcon BC50_Icon = new ImageIcon("src/BC50.jpg");
 

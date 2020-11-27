@@ -14,21 +14,11 @@ public class Money
     }
     public ImageIcon getImage()
     {
-        ImageIcon result = null;
-        try
+        ImageIcon result = new ImageIcon("src/"+value+".jpg");
+        for(int i = 0;i< allowed_values.length;i++)
         {
-            for(int i = 0;i<allowed_values.length;i++)
-            {
-                if(allowed_values[i]==value)
-                {
-                    result = new ImageIcon("src/"+queries[i]);
-                }
-            }
-        }catch (Exception e)
-        {
-            e.printStackTrace();
+            if(allowed_values[i]==value) result = new ImageIcon("src/"+queries[i]);
         }
-        if(result==null) System.out.println("No image found for value: "+value);
         return result;
     }
     public double getValue()

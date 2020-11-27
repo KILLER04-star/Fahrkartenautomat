@@ -9,13 +9,9 @@ public class Search
         List<Station> search;
         ExcelReader excelReader = new ExcelReader("src/DB.csv");
         search = excelReader.read();
-        for (int i = 0; i < search.size(); i++) 
+        for (Station station : search)
         {
-            Station station = search.get(i);
-            if (station.getName().contains(Query)&&!station.getName().equals("Station"))
-            {
-                result.add(station);
-            }
+            if (station.getName().contains(Query) && !station.getName().equals("Station")) result.add(station);
         }
         return result;
     }
@@ -23,10 +19,9 @@ public class Search
     {
         ExcelReader excelReader = new ExcelReader("src/DB.csv");
         List<Station> stations = excelReader.read();
-        for(int i = 0;i<stations.size();i++)
+        for (Station station : stations)
         {
-
-            if(stations.get(i).getName().equals(Query)) return true;
+            if (station.getName().equals(Query)) return true;
         }
         return false;
     }

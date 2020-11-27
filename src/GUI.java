@@ -6,36 +6,51 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
 import java.io.File;
 import java.io.IOException;
-import java.nio.Buffer;
 import java.util.ArrayList;
 
 public class GUI
 {
-    public static JFrame mainFrame = new JFrame("Fahrkarten");
+    public static final JFrame mainFrame = new JFrame("Fahrkarten");
     public static JPanel mainPanel = new JPanel();
-    public static JTextField DestinationTV = new JTextField();
-    public static JTextField startTextField = new JTextField();
-    public static ArrayList<JTextField> possible_station = new ArrayList<>();
-    public static JTextField ErrorTV = new JTextField();
-    public static JLabel startLabel = new JLabel("von");
-    public static JLabel toJLabel = new JLabel("nach");
-    public static JButton apply = new JButton("Ok");
-    public static String euro = ""+'\u20ac';
-    public static JLabel price_Label = new JLabel("Preis in "+euro);
-    public static JLabel user_HasCard = new JLabel("Haben sie eine Bahncard?");
-    public static JButton card = new JButton("ja");
-    public static JButton no_card = new JButton("nein");
-    public static JButton print_ticket = new JButton("Ticket drucken");
-    public static JButton show_Qr = new JButton("QR-Code anzeigen");
+    public static final JTextField DestinationTV = new JTextField();
+    public static final JTextField startTextField = new JTextField();
+    public static final ArrayList<JTextField> possible_station = new ArrayList<>();
+    public static final JTextField ErrorTV = new JTextField();
+    public static final JLabel startLabel = new JLabel("von");
+    public static final JLabel toJLabel = new JLabel("nach");
+    public static final JButton apply = new JButton("Ok");
+    public static final String euro = ""+'\u20ac';
+    public static final JLabel price_Label = new JLabel("Preis in "+euro);
+    public static final JLabel user_HasCard = new JLabel("Haben sie eine Bahncard?");
+    public static final JButton card = new JButton("ja");
+    public static final JButton no_card = new JButton("nein");
+    public static final JButton print_ticket = new JButton("Ticket drucken");
+    public static final JButton show_Qr = new JButton("QR-Code anzeigen");
     public static BufferedImage bufferedImage;
+    public static final JButton BC25_Btn = new JButton("Bahncard 25");
+    public static final JButton BC50_Btn = new JButton("Bahncard 50");
+    public static BufferedImage insert_coin;
 
-    public static int possible_station_x = 350;
+    static
+    {
+        try
+        {
+            insert_coin = ImageIO.read(new File("src/insert_coin.jpg"));
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public static final int possible_station_x = 350;
     public static int possible_station_y = 50;
 
     public static int size = 0;
+
+    public static  int money_x = 1000;
+    public static  int money_y = 200;
 
     public static void createGUI()
     {
@@ -45,6 +60,19 @@ public class GUI
         mainFrame.setVisible(true);
         mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         mainFrame.setResizable(false);
+
+        mainPanel = new JPanel()
+        {
+            @Override
+            public void paintComponent(Graphics g)
+            {
+                super.paintComponent(g);
+                if(insert_coin!=null)
+                {
+                    g.drawImage(insert_coin,1000,25,insert_coin.getWidth()/2,insert_coin.getHeight()/2,null);
+                }
+            }
+        };
 
         paint();
     }
@@ -114,9 +142,54 @@ public class GUI
     }
     public static void paint()
     {
+        money_x = 1000;
+        money_y = 200;
+       /*
+        */
         mainPanel.setVisible(true);
         mainPanel.setLayout(null);
         mainPanel.setEnabled(true);
+
+        for(int i = 0;i<Money.queries.length;i++)
+        {
+            JButton button = new JButton(Money.allowed_values[i]+" "+GUI.euro);
+            try
+            {
+                Money money = new Money(Money.allowed_values[i]);
+                System.out.println(money.getValue());
+              //  button.setIcon(money.getPublicImage());
+            }catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+            button.setVisible(true);
+            button.setEnabled(true);
+            button.setBounds(money_x,money_y,100,100);
+            mainPanel.add(button);
+            money_x += 120;
+            if(Money.allowed_values[i]==1)
+            {
+                money_y+=120;
+                money_x=1000;
+            }
+        }
+
+
+
+        ImageIcon BC25_Icon = new ImageIcon("src/BC25.jpg");
+        ImageIcon BC50_Icon = new ImageIcon("src/BC50.jpg");
+
+        BC25_Btn.setVisible(false);
+        BC25_Btn.setEnabled(true);
+        BC25_Btn.setIcon(BC25_Icon);
+        BC25_Btn.setBounds(startTextField.getX(),400,BC25_Icon.getIconWidth(),BC25_Icon.getIconHeight());
+        mainPanel.add(BC25_Btn);
+
+        BC50_Btn.setVisible(false);
+        BC50_Btn.setEnabled(true);
+        BC50_Btn.setIcon(BC50_Icon);
+        BC50_Btn.setBounds(startTextField.getX()+BC25_Btn.getWidth()+20,400,BC50_Icon.getIconWidth(),BC50_Icon.getIconHeight());
+        mainPanel.add(BC50_Btn);
 
         startTextField.setBounds(50,50,300,30);
         startTextField.setEnabled(true);
@@ -151,6 +224,7 @@ public class GUI
         price_Label.setBounds(startTextField.getX(),250,200,30);
         mainPanel.add(price_Label);
 
+        GUI.user_HasCard.setText("Haben sie eine Bahncard?");
         user_HasCard.setEnabled(true);
         user_HasCard.setVisible(false);
         user_HasCard.setBounds(startTextField.getX(),300,200,30);

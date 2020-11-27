@@ -5,7 +5,7 @@ import java.util.List;
 
 public class ExcelReader
 {
-    String path;
+    final String path;
     public ExcelReader(String path) 
     {
         this.path = path;

@@ -183,7 +183,7 @@ public class GUI
                 }
                 button.setBounds(money_x,money_y,imageIcon.getIconWidth(),imageIcon.getIconHeight());
                 mainPanel.add(button);
-                MoneyButton moneyButton = new MoneyButton(button,Money.allowed_values[ops]);
+                MoneyButton moneyButton = new MoneyButton(button,Var.allowed_values[ops]);
                 moneyButtons.add(moneyButton);
                 mainFrame.repaint();
                 money_x +=imageIcon.getIconWidth()+10;

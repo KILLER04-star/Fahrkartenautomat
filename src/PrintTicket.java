@@ -47,9 +47,9 @@ public class PrintTicket
         try
         {
             ImageIO.write(img, "png", new File("src/Ticket.png"));
-        } catch (IOException ex) {
+        } catch (IOException ex)
+        {
             ex.printStackTrace();
         }
-
     }
 }

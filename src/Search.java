@@ -15,6 +15,7 @@ public class Search
         }
         return result;
     }
+
     public static boolean isStation(String Query)
     {
         ExcelReader excelReader = new ExcelReader("src/DB.csv");

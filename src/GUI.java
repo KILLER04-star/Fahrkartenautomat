@@ -195,14 +195,14 @@ public class GUI
                         if(Var.hasToPay)
                         {
                             Var.still_to_pay -= moneyButton.getValue();
-                            GUI.still_to_pay_label.setText("Noch zu zahlen: " + Var.still_to_pay + " " + GUI.euro);
-                            GUI.mainFrame.repaint();
                             if(Var.still_to_pay<=0)
                             {
                                 Var.isPayed = true;
                                 Var.hasToPay = false;
                                 Var.still_to_pay = 0;
                             }
+                            GUI.still_to_pay_label.setText("Noch zu zahlen: " + Var.still_to_pay + " " + GUI.euro);
+                            GUI.mainFrame.repaint();
                         }
                     }
                 });

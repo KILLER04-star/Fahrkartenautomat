@@ -149,11 +149,12 @@ public class GUI
         money_x = 1000;
         money_y = 200;
 
-
         mainPanel.setVisible(true);
         mainPanel.setLayout(null);
         mainPanel.setEnabled(true);
+
         int ops = 0;
+
         for(int i = 0;i<4;i++)
         {
             ops++;
@@ -213,8 +214,6 @@ public class GUI
         DestinationTV.setEditable(true);
         DestinationTV.setVisible(true);
         mainPanel.add(DestinationTV);
-
-
 
         price_Label.setEnabled(true);
         price_Label.setVisible(true);
@@ -287,7 +286,6 @@ public class GUI
         ticketFrame.setVisible(true);
         ticketFrame.setEnabled(true);
 
-
         ticket_panel.setVisible(true);
         ticket_panel.setLayout(null);
         ticket_panel.setEnabled(true);
@@ -339,7 +337,6 @@ public class GUI
         qrFrame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         qrFrame.setVisible(true);
         qrFrame.setEnabled(true);
-
 
         qr_panel.setVisible(true);
         qr_panel.setLayout(null);

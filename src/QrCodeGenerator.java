@@ -1,9 +1,21 @@
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+
+import net.glxn.qrgen.javase.QRCode;
+
+import javax.imageio.ImageIO;
 
 public class QrCodeGenerator //generiert QR-Code
 {
-    public static BufferedImage generateQrCode(String text) throws Exception
+    public static BufferedImage generateQRCodeImage(String barcodeText) throws Exception
     {
-        return null;
+        ByteArrayOutputStream stream = QRCode
+                .from(barcodeText)
+                .withSize(250, 250)
+                .stream();
+        ByteArrayInputStream bis = new ByteArrayInputStream(stream.toByteArray());
+
+        return ImageIO.read(bis);
     }
 }

@@ -9,4 +9,7 @@ public class Var
             "50ct.jpg","1euro.jpg","2euro.jpg","5euro.jpg",
             "10euro.jpg","20euro.jpg","50euro.jpg"};
     public static final double[] allowed_values = {0.01,0.02,0.05,0.10,0.20,0.50,1.0,2.0,5.0,10.0,20.0,50.0};
+    public static String Ticket_line1;
+    public static String Ticket_line2;
+    public static String Ticket_line3;
 }

@@ -2,7 +2,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+
 /*fast sämtliche Actions (außer diejenigen aus den Listen) werden hier erkannt und dann verarbeitet*/
 public class ActionListener
 {
@@ -132,10 +135,11 @@ public class ActionListener
                 ArrayList<Station> possible = Search.search(GUI.DestinationTV.getText());
                 Station end = possible.get(0);
                 possible = Search.search(GUI.startTextField.getText());
-                //   PrintTicket.print_ticket(possible.get(0),end,Pricing.calculatePrice(possible.get(0),end));
-                try {
+                try
+                {
                     if (Var.isPayed)
                     {
+                        generate_Ticket_Information(possible.get(0),end);
                         GUI.Show_Qr();
                         GUI.print_ticket.setVisible(false);
                         GUI.show_Qr.setVisible(false);
@@ -218,5 +222,13 @@ public class ActionListener
         {
             GUI.same_station_error();
         } else GUI.apply.setBackground(Color.GREEN);
+    }
+    public static void generate_Ticket_Information(Station start, Station end)
+    {
+        SimpleDateFormat sdf_date = new SimpleDateFormat("dd.MM.yyyy");
+        SimpleDateFormat sdf_time = new SimpleDateFormat("HH:mm:ss");
+        Var.Ticket_line1 = "Von: "+start.getName()+" nach: "+end.getName();
+        Var.Ticket_line2 = " gekauft am: "+sdf_date.format(new Date())+ " um: "+sdf_time.format(new Date())+" Uhr";
+        Var.Ticket_line3 = " Preis: "+Var.Price+ " "+GUI.euro+ " "+Var.Card;
     }
 }

@@ -8,5 +8,8 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="com.google.zxing:android-core:3.3.0" level="project" />
+    <orderEntry type="library" name="com.google.zxing:core:3.3.0" level="project" />
+    <orderEntry type="library" name="com.google.zxing:javase:3.3.0" level="project" />
+    <orderEntry type="library" name="net.glxn.qrgen:javase:2.0" level="project" />
   </component>
 </module>

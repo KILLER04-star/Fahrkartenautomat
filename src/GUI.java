@@ -65,7 +65,6 @@ public class GUI
         Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
         mainFrame.setBounds(0,0,d.width,d.height);
         mainFrame.setEnabled(true);
-        mainFrame.setVisible(true);
         mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         mainFrame.setResizable(false);
 
@@ -157,7 +156,6 @@ public class GUI
         money_x = 1000;
         money_y = 200;
 
-        mainPanel.setVisible(true);
         mainPanel.setLayout(null);
         mainPanel.setEnabled(true);
 
@@ -319,7 +317,10 @@ public class GUI
         no_change.setBorder(null);
         mainPanel.add(no_change);
 
+        mainPanel.setVisible(true);
+
         mainFrame.add(mainPanel);
+        mainFrame.setVisible(true);
     }
     public static void same_station_error()
     {
@@ -352,10 +353,8 @@ public class GUI
         ticketFrame.setResizable(false);
         ticketFrame.setBounds(500,500,500,300);
         ticketFrame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-        ticketFrame.setVisible(true);
         ticketFrame.setEnabled(true);
 
-        ticket_panel.setVisible(true);
         ticket_panel.setLayout(null);
         ticket_panel.setEnabled(true);
 
@@ -364,9 +363,11 @@ public class GUI
         ok.setVisible(true);
         ok.setBounds(ticketFrame.getWidth()/2-50,200,100,30);
         ok.setBackground(Color.CYAN);
-        ticket_panel.add(ok);
 
+        ticket_panel.add(ok);
+        ticket_panel.setVisible(true);
         ticketFrame.add(ticket_panel);
+        ticketFrame.setVisible(true);
 
         ok.addActionListener(new ActionListener()
         {
@@ -380,21 +381,23 @@ public class GUI
         });
     }
     public static void Show_Qr()
-    { //zeigt den generierten QR-Code in einem seperatem Fenster
+    {
+        //zeigt den generierten QR-Code in einem seperatem Fenster
         JFrame qrFrame = new JFrame("QR");
+        String final_info = Var.Ticket_line1+'\n'+Var.Ticket_line2+'\n'+Var.Ticket_line3;
+        final int[] width = {0};
         final JPanel qr_panel = new JPanel()
         {
             @Override
             public void paintComponent(Graphics g)
             {
                 super.paintComponent(g);
-                File f;
+
                 try
                 {
-                    f = new File("src/qr.png");
-                    bufferedImage = new BufferedImage(50, 50, BufferedImage.TYPE_INT_RGB);
-                    bufferedImage = ImageIO.read(f);
+                    bufferedImage = QrCodeGenerator.generateQRCodeImage(final_info);
                     g.drawImage(bufferedImage, 0, 0, null);
+                    width[0] = bufferedImage.getWidth();
                 } catch (Exception e)
                 {
                     e.printStackTrace();
@@ -404,21 +407,23 @@ public class GUI
         qrFrame.setResizable(false);
         qrFrame.setBounds(500,500,500,300);
         qrFrame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-        qrFrame.setVisible(true);
         qrFrame.setEnabled(true);
 
-        qr_panel.setVisible(true);
+
         qr_panel.setLayout(null);
         qr_panel.setEnabled(true);
 
         JButton ok = new JButton("Schliessen");
         ok.setEnabled(true);
         ok.setVisible(true);
-        ok.setBounds(qrFrame.getWidth()/2-50,200,100,30);
+        ok.setBounds(350,200,100,30);
         ok.setBackground(Color.CYAN);
         qr_panel.add(ok);
 
+        qr_panel.setVisible(true);
         qrFrame.add(qr_panel);
+        qrFrame.repaint();
+        qrFrame.setVisible(true);
 
         ok.addActionListener(new ActionListener()
         {

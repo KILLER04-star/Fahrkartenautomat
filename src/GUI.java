@@ -52,6 +52,12 @@ public class GUI
     public static  int money_x = 1000;
     public static  int money_y = 200;
 
+    public static ArrayList<JButton> moneyButtons = new ArrayList<>();
+
+    public static final String[] queries = {"1ct.jpg","2ct.jpg","5ct.jpg","10ct.jpg","20ct.jpg",
+            "50ct.jpg","1euro.jpg","2euro.jpg","5euro.jpg",
+            "10euro.jpg","20euro.jpg","50euro.jpg"};
+
     public static void createGUI()
     {
         Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
@@ -157,22 +163,34 @@ public class GUI
 
         for(int i = 0;i<4;i++)
         {
-            ops++;
             money_x = 1000;
+            int height = 0;
             for(int y = 0;y<3;y++)
             {
-                 ops *= y;
                 JButton button = new JButton();
-                Money money = new Money(Money.allowed_values[ops]);
                 button.setVisible(true);
                 button.setEnabled(true);
-               // button.setIcon(money.getImage());
-                button.setBounds(money_x,money_y,100,100);
+                ImageIcon imageIcon = new ImageIcon("src/"+queries[ops]);
+                button.setIcon(imageIcon);
+                button.setBorder(null);
+                button.setBorderPainted(false);
+                if(queries[ops].equals("5euro.jpg"))
+                {
+                    money_x = 1000;
+                    money_y+=height;
+                }
+                button.setBounds(money_x,money_y,imageIcon.getIconWidth(),imageIcon.getIconHeight());
                 mainPanel.add(button);
-                money_x +=110;
+                moneyButtons.add(button);
+                mainFrame.repaint();
+                money_x +=imageIcon.getIconWidth()+10;
+                if(height<imageIcon.getIconHeight())height = imageIcon.getIconHeight();
+                ops++;
             }
-            money_y +=110;
+            money_y +=height;
+            mainFrame.repaint();
         }
+        mainFrame.repaint();
         ImageIcon BC25_Icon = new ImageIcon("src/BC25.jpg");
         ImageIcon BC50_Icon = new ImageIcon("src/BC50.jpg");
 
@@ -180,17 +198,23 @@ public class GUI
         BC25_Btn.setEnabled(true);
         BC25_Btn.setIcon(BC25_Icon);
         BC25_Btn.setBounds(startTextField.getX(),400,BC25_Icon.getIconWidth(),BC25_Icon.getIconHeight());
+        BC25_Btn.setBorderPainted(false);
+        BC25_Btn.setBorder(null);
         mainPanel.add(BC25_Btn);
 
         apply.setVisible(true);
         apply.setEnabled(true);
         apply.setBounds(50,200,200,30);
+        apply.setBorderPainted(false);
+        apply.setBorder(null);
         mainPanel.add(apply);
 
         BC50_Btn.setVisible(false);
         BC50_Btn.setEnabled(true);
         BC50_Btn.setIcon(BC50_Icon);
         BC50_Btn.setBounds(startTextField.getX()+BC25_Btn.getWidth()+20,400,BC50_Icon.getIconWidth(),BC50_Icon.getIconHeight());
+        BC50_Btn.setBorderPainted(false);
+        BC50_Btn.setBorder(null);
         mainPanel.add(BC50_Btn);
 
         startTextField.setBounds(50,50,300,30);
@@ -230,24 +254,32 @@ public class GUI
         card.setVisible(false);
         card.setBounds(startTextField.getX(),340,70,20);
         card.setBackground(Color.GREEN);
+        card.setBorderPainted(false);
+        card.setBorder(null);
         mainPanel.add(card);
 
         no_card.setEnabled(true);
         no_card.setVisible(false);
         no_card.setBounds(startTextField.getX()+card.getWidth()*2,340,70,20);
         no_card.setBackground(Color.RED);
+        no_card.setBorderPainted(false);
+        no_card.setBorder(null);
         mainPanel.add(no_card);
 
         print_ticket.setVisible(false);
         print_ticket.setEnabled(true);
         print_ticket.setBounds(startTextField.getX(),850,1920/2,50);
         print_ticket.setBackground(Color.CYAN);
+        print_ticket.setBorderPainted(false);
+        print_ticket.setBorder(null);
         mainPanel.add(print_ticket);
 
         show_Qr.setVisible(false);
         show_Qr.setEnabled(true);
         show_Qr.setBounds(startTextField.getX(),950,1920/2,50);
         show_Qr.setBackground(Color.ORANGE);
+        show_Qr.setBorderPainted(false);
+        show_Qr.setBorder(null);
         mainPanel.add(show_Qr);
 
         mainFrame.add(mainPanel);

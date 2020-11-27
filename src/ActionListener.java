@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
@@ -164,6 +165,7 @@ public class ActionListener
                 Label_setText();
             }
         });
+        money_actions();
     }
 
     private static void Label_setText()
@@ -201,5 +203,20 @@ public static void startTVActions()
             || !Search.isStation(GUI.startTextField.getText())) {
         GUI.same_station_error();
     } else GUI.apply.setBackground(Color.GREEN);
+}
+public static void money_actions()
+{
+    for(int i = 0;i<GUI.moneyButtons.size();i++)
+    {
+        JButton button = GUI.moneyButtons.get(i);
+        button.addActionListener(new java.awt.event.ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                System.out.println("Action");
+            }
+        });
+    }
 }
 }

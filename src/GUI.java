@@ -73,7 +73,11 @@ public class GUI
                 }
             }
         };
-
+        apply.setVisible(true);
+        apply.setEnabled(true);
+        apply.setBounds(50,200,200,30);
+        apply.setBackground(Color.RED);
+        mainPanel.add(apply);
         paint();
     }
     public static void list_stations(ArrayList<Station> list,String Query,JTextField TV,JTextField OtherTV)
@@ -156,8 +160,8 @@ public class GUI
             try
             {
                 Money money = new Money(Money.allowed_values[i]);
-                System.out.println(money.getValue());
-              //  button.setIcon(money.getPublicImage());
+              //  System.out.println(money.getImage());
+              //  button.setIcon(money.getImage());
             }catch (Exception e)
             {
                 e.printStackTrace();
@@ -174,8 +178,6 @@ public class GUI
             }
         }
 
-
-
         ImageIcon BC25_Icon = new ImageIcon("src/BC25.jpg");
         ImageIcon BC50_Icon = new ImageIcon("src/BC50.jpg");
 
@@ -184,6 +186,11 @@ public class GUI
         BC25_Btn.setIcon(BC25_Icon);
         BC25_Btn.setBounds(startTextField.getX(),400,BC25_Icon.getIconWidth(),BC25_Icon.getIconHeight());
         mainPanel.add(BC25_Btn);
+
+        apply.setVisible(true);
+        apply.setEnabled(true);
+        apply.setBounds(50,200,200,30);
+        mainPanel.add(apply);
 
         BC50_Btn.setVisible(false);
         BC50_Btn.setEnabled(true);
@@ -197,7 +204,6 @@ public class GUI
         startTextField.setVisible(true);
         mainPanel.add(startTextField);
 
-        DestinationTV.setBounds(800,50,300,30);
         startLabel.setVisible(true);
         startLabel.setEnabled(true);
         startLabel.setBounds(50,25,300,25);
@@ -214,10 +220,7 @@ public class GUI
         DestinationTV.setVisible(true);
         mainPanel.add(DestinationTV);
 
-        apply.setVisible(true);
-        apply.setEnabled(true);
-        apply.setBounds(startTextField.getX(),200,200,30);
-        mainPanel.add(apply);
+
 
         price_Label.setEnabled(true);
         price_Label.setVisible(true);

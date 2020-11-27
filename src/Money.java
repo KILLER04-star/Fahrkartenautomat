@@ -2,7 +2,6 @@ import javax.swing.*;
 
 public class Money
 {
-    ImageIcon image;
     double value;
     public static final String[] queries = {"1ct.jpg","2ct.jpg","5ct.jpg","10ct.jpg","20ct.jpg",
             "50ct.jpg","1euro.jpg","2euro.jpg","5euro.jpg",
@@ -12,7 +11,6 @@ public class Money
     public Money(double value)
     {
         this.value = value;
-        image = getImage();
     }
     public ImageIcon getImage()
     {
@@ -23,13 +21,7 @@ public class Money
             {
                 if(allowed_values[i]==value)
                 {
-                    try
-                    {
-                        result = new ImageIcon("src/"+queries[i]);
-                    }catch (Exception e)
-                    {
-                        e.printStackTrace();
-                    }
+                    result = new ImageIcon("src/"+queries[i]);
                 }
             }
         }catch (Exception e)

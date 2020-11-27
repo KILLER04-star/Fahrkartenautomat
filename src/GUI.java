@@ -52,7 +52,9 @@ public class GUI
     public static  int money_x = 1000;
     public static  int money_y = 200;
 
-    public static ArrayList<JButton> moneyButtons = new ArrayList<>();
+    public static ArrayList<MoneyButton> moneyButtons = new ArrayList<>();
+    public static JLabel still_to_pay_label = new JLabel();
+    public static JLabel no_change = new JLabel();
 
     public static final String[] queries = {"1ct.jpg","2ct.jpg","5ct.jpg","10ct.jpg","20ct.jpg",
             "50ct.jpg","1euro.jpg","2euro.jpg","5euro.jpg",
@@ -181,11 +183,31 @@ public class GUI
                 }
                 button.setBounds(money_x,money_y,imageIcon.getIconWidth(),imageIcon.getIconHeight());
                 mainPanel.add(button);
-                moneyButtons.add(button);
+                MoneyButton moneyButton = new MoneyButton(button,Money.allowed_values[ops]);
+                moneyButtons.add(moneyButton);
                 mainFrame.repaint();
                 money_x +=imageIcon.getIconWidth()+10;
                 if(height<imageIcon.getIconHeight())height = imageIcon.getIconHeight();
                 ops++;
+                button.addActionListener(new ActionListener()
+                {
+                    @Override
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        if(Var.hasToPay)
+                        {
+                            Var.still_to_pay -= moneyButton.getValue();
+                            GUI.still_to_pay_label.setText("Noch zu zahlen: " + Var.still_to_pay + " " + GUI.euro);
+                            GUI.mainFrame.repaint();
+                            if(Var.still_to_pay<=0)
+                            {
+                                Var.isPayed = true;
+                                Var.hasToPay = false;
+                                Var.still_to_pay = 0;
+                            }
+                        }
+                    }
+                });
             }
             money_y +=height;
             mainFrame.repaint();
@@ -281,6 +303,20 @@ public class GUI
         show_Qr.setBorderPainted(false);
         show_Qr.setBorder(null);
         mainPanel.add(show_Qr);
+
+        still_to_pay_label.setEnabled(true);
+        still_to_pay_label.setVisible(true);
+        still_to_pay_label.setBounds(1500,25,200,50);
+        still_to_pay_label.setBorder(null);
+        mainPanel.add(still_to_pay_label);
+
+        no_change.setVisible(true);
+        no_change.setText("Hinweis: Automat gibt kein Wechselgeld.");
+        no_change.setEnabled(true);
+        no_change.setBounds(still_to_pay_label.getX(),still_to_pay_label.getHeight()
+                +still_to_pay_label.getY()+10,300,50);
+        no_change.setBorder(null);
+        mainPanel.add(no_change);
 
         mainFrame.add(mainPanel);
     }

@@ -63,6 +63,7 @@ public class ActionListener
                     GUI.card.setVisible(true);
                     GUI.user_HasCard.setVisible(true);
                     GUI.mainFrame.repaint();
+
                 }
             }
         });
@@ -77,7 +78,6 @@ public class ActionListener
                 GUI.BC25_Btn.setVisible(true);
                 GUI.BC50_Btn.setVisible(true);
                 GUI.mainFrame.repaint();
-                Money money = new Money(1);
             }
         });
         GUI.no_card.addActionListener(new java.awt.event.ActionListener()
@@ -96,7 +96,10 @@ public class ActionListener
                 GUI.user_HasCard.setVisible(false);
                 GUI.card.setVisible(false);
                 GUI.no_card.setVisible(false);
+                Var.still_to_pay = Var.Price;
+                GUI.still_to_pay_label.setText("Noch zu zahlen: "+Var.still_to_pay+" "+GUI.euro);
                 GUI.mainFrame.repaint();
+                Var.hasToPay = true;
             }
         });
         GUI.print_ticket.addActionListener(new java.awt.event.ActionListener()
@@ -108,10 +111,14 @@ public class ActionListener
                 Station end = possible.get(0);
                 possible = Search.search(GUI.startTextField.getText());
                 PrintTicket.print_ticket(possible.get(0),end,Var.Price);
-                try {
-                    GUI.showTicket();
-                    GUI.print_ticket.setVisible(false);
-                    GUI.show_Qr.setVisible(false);
+                try
+                {
+                    if(Var.isPayed)
+                    {
+                        GUI.showTicket();
+                        GUI.print_ticket.setVisible(false);
+                        GUI.show_Qr.setVisible(false);
+                    }
                 }catch (Exception exception)
                 {
                     exception.printStackTrace();
@@ -127,10 +134,14 @@ public class ActionListener
                 Station end = possible.get(0);
                 possible = Search.search(GUI.startTextField.getText());
              //   PrintTicket.print_ticket(possible.get(0),end,Pricing.calculatePrice(possible.get(0),end));
-                try {
-                    GUI.Show_Qr();
-                    GUI.print_ticket.setVisible(false);
-                    GUI.show_Qr.setVisible(false);
+                try
+                {
+                    if(Var.isPayed)
+                    {
+                        GUI.Show_Qr();
+                        GUI.print_ticket.setVisible(false);
+                        GUI.show_Qr.setVisible(false);
+                    }
                 }catch (Exception exception)
                 {
                     exception.printStackTrace();
@@ -148,7 +159,10 @@ public class ActionListener
                 Station station_end = stations.get(0);
                 Var.Price = Math.round(((Pricing.calculatePrice(station_start,station_end)/4)*3)*100)/100;
                 Var.Card = "Bahncard 25";
+                Var.still_to_pay = Var.Price;
+                GUI.still_to_pay_label.setText("Noch zu zahlen: "+Var.still_to_pay+" "+GUI.euro);
                 Label_setText();
+                Var.hasToPay = true;
             }
         });
         GUI.BC50_Btn.addActionListener(new java.awt.event.ActionListener()
@@ -162,7 +176,10 @@ public class ActionListener
                 Station station_end = stations.get(0);
                 Var.Price = Math.round(((Pricing.calculatePrice(station_start,station_end)/4)*2)*100)/100;
                 Var.Card = "Bahncard 50";
+                Var.still_to_pay = Var.Price;
+                GUI.still_to_pay_label.setText("Noch zu zahlen: "+Var.still_to_pay+" "+GUI.euro);
                 Label_setText();
+                Var.hasToPay = true;
             }
         });
         money_actions();
@@ -208,13 +225,16 @@ public static void money_actions()
 {
     for(int i = 0;i<GUI.moneyButtons.size();i++)
     {
-        JButton button = GUI.moneyButtons.get(i);
-        button.addActionListener(new java.awt.event.ActionListener()
+        MoneyButton moneyButton = GUI.moneyButtons.get(i);
+        moneyButton.getButton().addActionListener(new java.awt.event.ActionListener()
         {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                System.out.println("Action");
+                Var.still_to_pay -= moneyButton.getValue();
+                System.out.println(Var.still_to_pay);
+                GUI.still_to_pay_label.setText("Noch zu zahlen: "+Var.still_to_pay+" "+GUI.euro);
+                GUI.mainFrame.repaint();
             }
         });
     }

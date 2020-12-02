@@ -163,7 +163,7 @@ public class GUI
 
         for(int i = 0;i<4;i++) //zeichnet Geldscheine und lässt den Nutzer Bezahlen
         {
-            money_x = 650;
+            money_x = 550;
             int height = 0;
             for(int y = 0;y<3;y++)
             {
@@ -176,7 +176,7 @@ public class GUI
                 button.setBorderPainted(false);
                 if(queries[ops].equals("5euro.jpg"))
                 {
-                    money_x = 650;
+                    money_x = 550;
                     money_y+=height;
                 }
                 button.setBounds(money_x,money_y,imageIcon.getIconWidth(),imageIcon.getIconHeight());
@@ -289,7 +289,7 @@ public class GUI
 
         print_ticket.setVisible(false);
         print_ticket.setEnabled(true);
-        print_ticket.setBounds(startTextField.getX(),600,1920/2,50);
+        print_ticket.setBounds(startTextField.getX(),600,300,50);
         print_ticket.setBackground(Color.CYAN);
         print_ticket.setBorderPainted(false);
         print_ticket.setBorder(null);
@@ -297,7 +297,7 @@ public class GUI
 
         show_Qr.setVisible(false);
         show_Qr.setEnabled(true);
-        show_Qr.setBounds(startTextField.getX(),700,1920/2,50);
+        show_Qr.setBounds(startTextField.getX(),700,300,50);
         show_Qr.setBackground(Color.ORANGE);
         show_Qr.setBorderPainted(false);
         show_Qr.setBorder(null);

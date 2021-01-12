@@ -38,11 +38,11 @@ public class PrintTicket
         g2d.drawString(Var.Ticket_line3,0,100);
         Font smallFont = new Font("Arial",Font.PLAIN,8);
         g2d.setFont(smallFont);
-        g2d.drawString("(zu finden unter src/ticket.png)",0,150);
+        g2d.drawString("(zu finden unter out/ticket.png)",0,150);
         g2d.dispose();
         try
         {
-            ImageIO.write(img, "png", new File("src/Ticket.png"));
+            ImageIO.write(img, "png", new File("out/Ticket.png"));
         } catch (IOException ex)
         {
             ex.printStackTrace();

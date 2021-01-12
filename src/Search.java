@@ -6,7 +6,7 @@ public class Search
     public static ArrayList<Station> search(String Query) //gibt eine Liste mit möglichen Stationen zurück
     {
         ArrayList<Station> result = new ArrayList<>();
-        ExcelReader excelReader = new ExcelReader("src/DB.csv");
+        ExcelReader excelReader = new ExcelReader("rsc/DB.csv");
         List<Station> search = excelReader.read();
 
         for (Station station : search)
@@ -18,7 +18,7 @@ public class Search
 
     public static boolean isStation(String Query) //Testet, ob ein Name zu einer Station gehört
     {
-        ExcelReader excelReader = new ExcelReader("src/DB.csv");
+        ExcelReader excelReader = new ExcelReader("rsc/DB.csv");
         List<Station> stations = excelReader.read();
         for (Station station : stations)
         {

@@ -8,6 +8,8 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 
 public class GUI
@@ -37,7 +39,7 @@ public class GUI
     {
         try
         {
-            insert_coin = ImageIO.read(new File("src/insert_coin.jpg"));
+            insert_coin = ImageIO.read(new File("rsc/insert_coin.jpg"));
         } catch (IOException e)
         {
             e.printStackTrace();
@@ -56,9 +58,9 @@ public class GUI
     public static JLabel still_to_pay_label = new JLabel();
     public static JLabel no_change = new JLabel();
 
-    public static final String[] queries = {"1ct.jpg","2ct.jpg","5ct.jpg","10ct.jpg","20ct.jpg",
-            "50ct.jpg","1euro.jpg","2euro.jpg","5euro.jpg",
-            "10euro.jpg","20euro.jpg","50euro.jpg"};
+    public static final String[] queries = {"rsc/1ct.jpg", "rsc/2ct.jpg", "rsc/5ct.jpg", "rsc/10ct.jpg", "rsc/20ct.jpg",
+            "rsc/50ct.jpg", "rsc/1euro.jpg", "rsc/2euro.jpg", "rsc/5euro.jpg",
+            "rsc/10euro.jpg", "rsc/20euro.jpg", "rsc/50euro.jpg"};
 
     public static void createGUI()
     {
@@ -76,7 +78,7 @@ public class GUI
                 super.paintComponent(g);
                 if(insert_coin!=null)
                 {
-                    g.drawImage(insert_coin,1000,25,insert_coin.getWidth()/2,insert_coin.getHeight()/2,null);
+                    g.drawImage(insert_coin,800,25,insert_coin.getWidth()/2,insert_coin.getHeight()/2,null);
                 }
             }
         };
@@ -170,11 +172,12 @@ public class GUI
                 JButton button = new JButton();
                 button.setVisible(true);
                 button.setEnabled(true);
-                ImageIcon imageIcon = new ImageIcon("src/"+queries[ops]);
+                ImageIcon imageIcon = new ImageIcon(queries[ops]);
                 button.setIcon(imageIcon);
                 button.setBorder(null);
                 button.setBorderPainted(false);
-                if(queries[ops].equals("5euro.jpg"))
+
+                if(queries[ops].equals("rsc/5euro.jpg"))
                 {
                     money_x = 550;
                     money_y+=height;
@@ -194,11 +197,15 @@ public class GUI
                     {
                         if(Var.hasToPay)
                         {
-                            Var.still_to_pay -= moneyButton.getValue();
+                            BigDecimal tmp = BigDecimal.valueOf(Var.still_to_pay -= moneyButton.getValue());
+                            tmp = tmp.setScale(2, RoundingMode.HALF_UP);
+                            Var.still_to_pay = tmp.doubleValue();
                             if(Var.still_to_pay<=0)
                             {
                                 Var.isPayed = true;
                                 Var.hasToPay = false;
+                                double change = Var.still_to_pay;
+                                no_change.setText("Wechselgeld: "+(change*(-1))+" Euro");
                                 Var.still_to_pay = 0;
                             }
                             GUI.still_to_pay_label.setText("Noch zu zahlen: " + Var.still_to_pay + " " + GUI.euro);
@@ -212,8 +219,8 @@ public class GUI
         }
         mainFrame.repaint();
         /*Tut nichts weiter, als sämtliche Objekte in das Frame zu zeichnen*/
-        ImageIcon BC25_Icon = new ImageIcon("src/BC25.jpg");
-        ImageIcon BC50_Icon = new ImageIcon("src/BC50.jpg");
+        ImageIcon BC25_Icon = new ImageIcon("rsc/BC25.jpg");
+        ImageIcon BC50_Icon = new ImageIcon("rsc/BC50.jpg");
 
         BC25_Btn.setVisible(false);
         BC25_Btn.setEnabled(true);
@@ -305,12 +312,11 @@ public class GUI
 
         still_to_pay_label.setEnabled(true);
         still_to_pay_label.setVisible(true);
-        still_to_pay_label.setBounds(1200,25,200,50);
+        still_to_pay_label.setBounds(1000,25,200,50);
         still_to_pay_label.setBorder(null);
         mainPanel.add(still_to_pay_label);
 
         no_change.setVisible(true);
-        no_change.setText("Hinweis: Automat gibt kein Wechselgeld.");
         no_change.setEnabled(true);
         no_change.setBounds(still_to_pay_label.getX(),still_to_pay_label.getHeight()
                 +still_to_pay_label.getY()+10,300,50);
@@ -340,7 +346,7 @@ public class GUI
                 File f;
                 try
                 {
-                    f = new File("src/ticket.png");
+                    f = new File("out/ticket.png");
                     bufferedImage = new BufferedImage(50, 50, BufferedImage.TYPE_INT_RGB);
                     bufferedImage = ImageIO.read(f);
                     g.drawImage(bufferedImage, 0, 0, null);
@@ -408,7 +414,6 @@ public class GUI
         qrFrame.setBounds(500,500,500,300);
         qrFrame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         qrFrame.setEnabled(true);
-
 
         qr_panel.setLayout(null);
         qr_panel.setEnabled(true);
